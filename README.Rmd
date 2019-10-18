@@ -1,0 +1,45 @@
+---
+title: "README"
+output: github_document
+auhtor: Jörn Alexander Quent
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+This R packages includes the [official MRC colour palette](https://mrc.ukri.org/about/information-standards/mrc-brand-guidelines/colour-palette/) spilt into primary and secondary. This package was created following [this](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) example. For questions, contact me via e-mail: alex.quent at mrc-cbu.cam.ac.uk.
+
+# Example usage of MRColour
+```{r}
+library(ggplot2)
+library(MRColour)
+
+# Primary 
+mrc_pal("primary")(3)
+mrc_pal("primary")(10)
+
+# Secondary
+mrc_pal("secondary")(3)
+mrc_pal("secondary")(10)
+
+# ggplot functions
+ggplot(mtcars, aes(hp, mpg)) +
+  geom_point(color = mrc_cols("red"),
+             size = 4, alpha = .8)
+
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 4) +
+  scale_color_mrc()
+
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_mrc(palette = "secondary", guide = "none")
+
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_mrc(palette = "primary", guide = "none")
+```
+
